@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.SortedMap;
 
 public class ToDoListApp {
     public static void main(String[] args) {
@@ -20,9 +19,44 @@ public class ToDoListApp {
                 tasks.add(new NewTask(desc));
                 System.out.println("Задача добавлена!");
             } else if (choice == 2) {
-                System.out.println("Удаление задачи");
+                if (tasks.isEmpty()) {
+                    System.out.println("Список задач пуст.");
+                } else {
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + ". " + tasks.get(i));
+                    }
+                    System.out.println("Введите номер задачи для удаления");
+                    int num = scanner.nextInt();
+                    if (num >= 1 && num <= tasks.size()) {
+                        tasks.remove(num - 1);
+                        System.out.println("Задача удалена.");
+                    } else {
+                        System.out.println("Некорректный номер.");
+                    }
+                }
             } else if (choice == 3) {
-                System.out.println("Изменение задачи");
+                if (tasks.isEmpty()) {
+                    System.out.println("Список задач пуст.");
+                } else {
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + ". " + tasks.get(i));
+                    }
+
+                    System.out.print("Введите номер задачи для изменения: ");
+                    int num = scanner.nextInt();
+                    scanner.nextLine(); // поглощаем Enter
+
+                    if (num >= 1 && num <= tasks.size()) {
+                        System.out.print("Введите новое описание: ");
+                        String newDesc = scanner.nextLine();
+
+                        tasks.get(num - 1).description = newDesc;
+
+                        System.out.println("Задача обновлена.");
+                    } else {
+                        System.out.println("Некорректный номер.");
+                    }
+                }
             } else if (choice == 4) {
                 if (tasks.isEmpty()) {
                     System.out.println("Список задач пуст");
